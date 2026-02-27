@@ -12,7 +12,7 @@ export default function Header() {
             </div>
             <div>
               <h1 className="text-xl font-bold text-gray-900 leading-none">
-                Generator Kartu
+                Card Generator App
               </h1>
               <p className="text-xs text-gray-500 font-medium">
                 NRG & NUPTK Digital
