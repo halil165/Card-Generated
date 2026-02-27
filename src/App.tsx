@@ -85,7 +85,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans text-gray-900">
+    <div className="min-h-screen bg-gray-50 font-sans text-gray-900 pb-16">
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -102,6 +102,16 @@ function App() {
               </ul>
             </div>
             <CardForm data={data} onChange={setData} />
+
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                Keamanan Data
+              </h3>
+              <p className="text-xs text-gray-600 leading-relaxed">
+                Aplikasi ini berjalan sepenuhnya di browser Anda. Seluruh data dan foto diproses secara lokal dan **tidak pernah dikirim atau disimpan** di server mana pun. Privasi Anda adalah prioritas kami.
+              </p>
+            </div>
           </div>
 
           {/* Preview Section */}
