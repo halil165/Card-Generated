@@ -98,21 +98,21 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
 
             {/* Details */}
             <div className="flex-1 flex flex-col z-10 justify-between min-w-0">
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <div>
                   <label className="text-[9px] text-gray-500 uppercase font-black block leading-none mb-1">Nama Lengkap</label>
-                  <div className="text-sm font-bold uppercase truncate border-b border-gray-100 pb-1">{data.name || '-'}</div>
+                  <div className="text-sm font-bold uppercase truncate border-b border-gray-100 pb-1.5 leading-tight">{data.name || '-'}</div>
                 </div>
 
                 <div className="flex gap-4">
                   <div className="flex-1 min-w-0">
                     <label className="text-[9px] text-gray-500 uppercase font-black block leading-none mb-1">Nomor {data.type}</label>
-                    <div className="text-sm font-bold font-mono border-b border-gray-100 pb-1 truncate">{data.number || '-'}</div>
+                    <div className="text-sm font-bold font-mono border-b border-gray-100 pb-1.5 truncate leading-tight">{data.number || '-'}</div>
                   </div>
                   {data.nip && (
                     <div className="flex-1 min-w-0">
                       <label className="text-[9px] text-gray-500 uppercase font-black block leading-none mb-1">NIP</label>
-                      <div className="text-sm font-bold font-mono border-b border-gray-100 pb-1 truncate">{data.nip}</div>
+                      <div className="text-sm font-bold font-mono border-b border-gray-100 pb-1.5 truncate leading-tight">{data.nip}</div>
                     </div>
                   )}
                 </div>
@@ -120,19 +120,19 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
                 <div className="flex gap-4">
                   <div className="flex-1">
                     <label className="text-[9px] text-gray-500 uppercase font-black block leading-none mb-1">Tempat, Tgl Lahir</label>
-                    <div className="text-[12px] font-bold truncate border-b border-gray-100 pb-1">
+                    <div className="text-[12px] font-bold truncate border-b border-gray-100 pb-1.5 leading-tight">
                       {data.birthPlace || '-'}, {data.birthDate ? formatDate(data.birthDate) : '-'}
                     </div>
                   </div>
                   <div className="w-24">
                     <label className="text-[9px] text-gray-500 uppercase font-black block leading-none mb-1">Gender</label>
-                    <div className="text-[12px] font-bold truncate border-b border-gray-100 pb-1">{data.gender || '-'}</div>
+                    <div className="text-[12px] font-bold truncate border-b border-gray-100 pb-1.5 leading-tight">{data.gender || '-'}</div>
                   </div>
                 </div>
 
                 <div>
                   <label className="text-[9px] text-gray-500 uppercase font-black block leading-none mb-1">Unit Kerja</label>
-                  <div className="text-[12px] font-bold line-clamp-1 h-[18px]">{data.school || '-'}</div>
+                  <div className="text-[12px] font-bold line-clamp-2 min-h-[32px] leading-snug pt-0.5">{data.school || '-'}</div>
                 </div>
               </div>
 
