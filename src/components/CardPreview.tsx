@@ -60,7 +60,12 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
             <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
 
             <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm z-10 shrink-0">
-              <GraduationCap style={{ color: '#ffffff' }} size={32} />
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Logo_of_Ministry_of_Education_and_Culture_of_Republic_of_Indonesia.svg/800px-Logo_of_Ministry_of_Education_and_Culture_of_Republic_of_Indonesia.svg.png"
+                alt="Logo"
+                className="w-9 h-9 object-contain"
+                crossOrigin="anonymous"
+              />
             </div>
 
             <div className="flex flex-col justify-center items-center flex-1 px-2 z-10 text-center min-w-0">
@@ -73,12 +78,7 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
             </div>
 
             <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm z-10 shrink-0">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Logo_of_Ministry_of_Education_and_Culture_of_Republic_of_Indonesia.svg/800px-Logo_of_Ministry_of_Education_and_Culture_of_Republic_of_Indonesia.svg.png"
-                alt="Logo"
-                className="w-9 h-9 object-contain"
-                crossOrigin="anonymous"
-              />
+              <GraduationCap style={{ color: '#ffffff' }} size={32} />
             </div>
           </div>
 

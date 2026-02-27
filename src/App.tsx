@@ -99,7 +99,7 @@ function App() {
               <ul className="list-disc list-inside mt-1 space-y-1 text-blue-700/80">
                 <li>Isi data diri dengan lengkap dan benar.</li>
                 <li>Upload foto resmi (latar merah/biru disarankan).</li>
-                <li>Periksa pratinjau kartu di sebelah kanan.</li>
+                <li>Periksa pratinjau kartu di bagian bawah atau kanan.</li>
                 <li>Klik tombol "Unduh PDF" atau "Unduh JPG".</li>
               </ul>
             </div>
