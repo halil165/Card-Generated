@@ -63,11 +63,11 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
               <GraduationCap style={{ color: '#ffffff' }} size={32} />
             </div>
 
-            <div className="flex flex-col justify-center items-center flex-1 px-4 z-10 text-center">
-              <h1 className="text-[9px] font-bold tracking-wider text-white opacity-95 m-0 leading-normal">
+            <div className="flex flex-col justify-center items-center flex-1 px-2 z-10 text-center min-w-0">
+              <h1 className="text-[11px] font-bold tracking-[0.05em] text-white opacity-95 m-0 leading-tight whitespace-nowrap">
                 KEMENTERIAN PENDIDIKAN DASAR DAN MENENGAH
               </h1>
-              <h2 className="text-[14px] font-black text-white m-0 leading-normal mt-0.5 tracking-tight">
+              <h2 className="text-[17px] font-black text-white m-0 leading-tight mt-1 tracking-tight uppercase whitespace-nowrap">
                 {headerTitle}
               </h2>
             </div>
