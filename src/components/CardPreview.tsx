@@ -136,7 +136,7 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
                     <label className="text-[9px] text-gray-500 uppercase font-black block leading-none mb-1">Unit Kerja</label>
                     <div className="text-[12px] font-bold line-clamp-2 min-h-[32px] leading-snug pt-0.5">{data.school || '-'}</div>
                   </div>
-                  <div className="w-32">
+                  <div className="w-24 text-left">
                     <label className="text-[9px] text-gray-500 uppercase font-black block leading-none mb-1">Guru Mapel</label>
                     <div className="text-[12px] font-bold truncate border-b border-gray-100 pb-1 leading-tight">{data.subject || '-'}</div>
                   </div>
