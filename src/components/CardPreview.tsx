@@ -82,7 +82,7 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
           </div>
 
           {/* Content Body */}
-          <div className="flex-1 flex p-5 gap-5 relative bg-white">
+          <div className="flex-1 flex px-5 py-3 gap-5 relative bg-white">
             <div className="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/diamond-upholstery.png')] pointer-events-none"></div>
 
             {/* Photo */}
@@ -98,7 +98,7 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
 
             {/* Details */}
             <div className="flex-1 flex flex-col z-10 justify-between min-w-0">
-              <div className="space-y-3">
+              <div className="space-y-1.5">
                 <div>
                   <label className="text-[9px] text-gray-500 uppercase font-black block leading-none mb-1">Nama Lengkap</label>
                   <div className="text-sm font-bold uppercase truncate border-b border-gray-100 pb-1.5 leading-tight">{data.name || '-'}</div>
