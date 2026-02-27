@@ -17,6 +17,7 @@ interface CardData {
   birthPlace: string;
   birthDate: string;
   gender: 'Laki-laki' | 'Perempuan';
+  subject: string;
 }
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
     birthPlace: '',
     birthDate: '',
     gender: 'Laki-laki',
+    subject: '',
   });
 
   const [isGenerating, setIsGenerating] = useState(false);

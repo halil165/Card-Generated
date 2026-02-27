@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Upload, User, Calendar, MapPin, Building2, Hash, CreditCard, Trash2 } from 'lucide-react';
+import { Upload, User, Calendar, MapPin, Building2, Hash, CreditCard, Trash2, BookOpen } from 'lucide-react';
 
 interface CardData {
   type: 'NRG' | 'NUPTK';
@@ -11,6 +11,7 @@ interface CardData {
   birthPlace: string;
   birthDate: string;
   gender: 'Laki-laki' | 'Perempuan';
+  subject: string;
 }
 
 interface CardFormProps {
@@ -54,21 +55,19 @@ export default function CardForm({ data, onChange }: CardFormProps) {
         <div className="flex bg-gray-100 p-1 rounded-lg">
           <button
             onClick={() => onChange({ ...data, type: 'NRG' })}
-            className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${
-              data.type === 'NRG'
-                ? 'bg-white text-blue-600 shadow-sm'
-                : 'text-gray-500 hover:text-gray-700'
-            }`}
+            className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${data.type === 'NRG'
+              ? 'bg-white text-blue-600 shadow-sm'
+              : 'text-gray-500 hover:text-gray-700'
+              }`}
           >
             NRG
           </button>
           <button
             onClick={() => onChange({ ...data, type: 'NUPTK' })}
-            className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${
-              data.type === 'NUPTK'
-                ? 'bg-white text-blue-600 shadow-sm'
-                : 'text-gray-500 hover:text-gray-700'
-            }`}
+            className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${data.type === 'NUPTK'
+              ? 'bg-white text-blue-600 shadow-sm'
+              : 'text-gray-500 hover:text-gray-700'
+              }`}
           >
             NUPTK
           </button>
@@ -210,6 +209,23 @@ export default function CardForm({ data, onChange }: CardFormProps) {
               <option value="Laki-laki">Laki-laki</option>
               <option value="Perempuan">Perempuan</option>
             </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Guru Mapel</label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <BookOpen className="h-4 w-4 text-gray-400" />
+              </div>
+              <input
+                type="text"
+                name="subject"
+                value={data.subject || ''}
+                onChange={handleInputChange}
+                className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-shadow"
+                placeholder="Contoh: Matematika, Bahasa Inggris"
+              />
+            </div>
           </div>
 
           <div>
