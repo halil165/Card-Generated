@@ -53,7 +53,7 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
         >
           {/* Header */}
           <div
-            className="h-20 flex items-center px-4 justify-between relative overflow-hidden"
+            className="h-20 flex items-center px-4 justify-between relative"
             style={{ backgroundColor: colors.primary }}
           >
             <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
@@ -62,11 +62,11 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
               <GraduationCap style={{ color: '#ffffff' }} size={32} />
             </div>
 
-            <div className="flex flex-col justify-center items-center flex-1 px-2 z-10 text-center">
-              <h1 className="text-[10px] font-bold tracking-wide text-white opacity-90 m-0 leading-tight">
+            <div className="flex flex-col justify-center items-center flex-1 px-4 z-10 text-center">
+              <h1 className="text-[9px] font-bold tracking-wider text-white opacity-95 m-0 leading-normal">
                 KEMENTERIAN PENDIDIKAN DASAR DAN MENENGAH
               </h1>
-              <h2 className="text-[15px] font-black text-white m-0 leading-tight mt-1 tracking-tight">
+              <h2 className="text-[14px] font-black text-white m-0 leading-normal mt-0.5 tracking-tight">
                 {headerTitle}
               </h2>
             </div>

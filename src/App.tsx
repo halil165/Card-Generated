@@ -6,7 +6,6 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CardForm from './components/CardForm';
 import CardPreview from './components/CardPreview';
-import DeploymentGuide from './components/DeploymentGuide';
 
 interface CardData {
   type: 'NRG' | 'NUPTK';
@@ -103,15 +102,6 @@ function App() {
               </ul>
             </div>
             <CardForm data={data} onChange={setData} />
-
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">Informasi Teknologi</h3>
-              <div className="space-y-3 text-sm text-gray-600">
-                <p>Aplikasi ini berjalan sepenuhnya di browser Anda. Data dan foto tidak dikirim ke server mana pun, sehingga privasi Anda terjaga.</p>
-              </div>
-            </div>
-
-            <DeploymentGuide />
           </div>
 
           {/* Preview Section */}
