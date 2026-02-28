@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import { Download, Image as ImageIcon, Loader2 } from 'lucide-react';
+import { Download, Image as ImageIcon, Loader2, Shield } from 'lucide-react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CardForm from './components/CardForm';
@@ -126,12 +126,12 @@ function App() {
             </div>
             <CardForm data={data} onChange={setData} />
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-green-50 rounded-xl shadow-sm border border-green-200 p-6">
               <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                <Shield className="w-5 h-5 text-green-600" />
                 Keamanan Data
               </h3>
-              <p className="text-xs text-gray-600 leading-relaxed">
+              <p className="text-sm text-green-800 leading-relaxed">
                 Aplikasi ini berjalan sepenuhnya di browser Anda. Seluruh data dan foto diproses secara lokal dan **tidak pernah dikirim atau disimpan** di server mana pun. Privasi Anda adalah prioritas kami.
               </p>
             </div>
