@@ -2,18 +2,9 @@ import React, { forwardRef } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { GraduationCap } from 'lucide-react';
 
-interface CardData {
-  type: 'NRG' | 'NUPTK';
-  name: string;
-  number: string;
-  nip: string;
-  school: string;
-  photoUrl: string | null;
-  birthPlace: string;
-  birthDate: string;
-  gender: 'Laki-laki' | 'Perempuan';
-  subject: string;
-}
+
+import { CardData } from '../types';
+
 
 interface CardPreviewProps {
   data: CardData;
@@ -31,20 +22,21 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
   };
 
   const colors = data.type === 'NRG'
-    ? { primary: '#2563eb', dark: '#1e40af', light: '#eff6ff' }
-    : { primary: '#059669', dark: '#065f46', light: '#ecfdf5' };
+    ? { primary: '#1d4ed8', dark: '#1e40af', light: '#eff6ff' } // More vibrant blue
+    : { primary: '#047857', dark: '#065f46', light: '#ecfdf5' }; // More vibrant green
 
   const headerTitle = data.type === 'NRG'
     ? 'KARTU NOMOR REGISTRASI GURU'
     : 'KARTU NUPTK';
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center gap-8">
+      {/* Front Side */}
       <div className="relative">
         <div
           ref={ref}
           id="card-to-export"
-          className="w-[500px] h-[315px] bg-white rounded-xl shadow-2xl overflow-hidden relative flex flex-col"
+          className="w-[500px] h-[315px] bg-white rounded-xl shadow-2xl relative flex flex-col border border-gray-100"
           style={{
             fontFamily: 'sans-serif',
             color: '#111827',
@@ -52,16 +44,20 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
             boxSizing: 'border-box'
           }}
         >
+
+
           {/* Header */}
           <div
-            className="h-20 flex items-center px-4 justify-between relative"
-            style={{ backgroundColor: colors.primary }}
+            className="h-16 flex items-center px-4 justify-between relative shadow-md rounded-t-xl overflow-hidden"
+            style={{ background: `linear-gradient(135deg, ${colors.dark} 0%, ${colors.primary} 100%)` }}
           >
-            <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+            {/* Decorative elements for a modern look */}
+            <div className="absolute top-0 left-0 w-32 h-32 bg-white/10 rounded-full -translate-x-1/3 -translate-y-1/3 blur-xl"></div>
+            <div className="absolute bottom-0 right-0 w-24 h-24 bg-white/10 rounded-full translate-x-1/4 translate-y-1/4 blur-lg"></div>
 
-            <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm z-10 shrink-0">
+            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm z-10 shrink-0">
               <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Logo_of_Ministry_of_Education_and_Culture_of_Republic_of_Indonesia.svg/800px-Logo_of_Ministry_of_Education_and_Culture_of_Republic_of_Indonesia.svg.png"
+                src="/logo-kemdikbud.png"
                 alt="Logo"
                 className="w-9 h-9 object-contain"
                 crossOrigin="anonymous"
@@ -69,10 +65,10 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
             </div>
 
             <div className="flex flex-col justify-center items-center flex-1 px-2 z-10 text-center min-w-0">
-              <h1 className="text-[11px] font-bold tracking-[0.05em] text-white opacity-95 m-0 leading-tight whitespace-nowrap">
+              <h1 className="text-[10px] font-bold tracking-wider text-white/80 m-0 leading-tight whitespace-nowrap uppercase">
                 KEMENTERIAN PENDIDIKAN DASAR DAN MENENGAH
               </h1>
-              <h2 className="text-[17px] font-black text-white m-0 leading-tight mt-1 tracking-tight uppercase whitespace-nowrap">
+              <h2 className="text-base font-black text-white m-0 leading-tight mt-1 tracking-tight uppercase whitespace-nowrap">
                 {headerTitle}
               </h2>
             </div>
@@ -83,76 +79,80 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
           </div>
 
           {/* Content Body */}
-          <div className="flex-1 flex px-5 py-3 gap-5 relative bg-white">
-            <div className="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/diamond-upholstery.png')] pointer-events-none"></div>
-
+          <div className="flex-1 flex px-6 py-3 gap-5 relative">
             {/* Photo */}
-            <div className="w-32 flex flex-col z-10">
-              <div className="w-32 h-40 bg-gray-100 border-2 border-gray-200 rounded-lg overflow-hidden shadow-inner flex items-center justify-center">
+            <div className="w-32 flex flex-col z-10 shrink-0">
+              <div className="w-32 h-40 bg-gray-100 border border-gray-200 rounded-lg overflow-hidden shadow-inner flex items-center justify-center relative">
                 {data.photoUrl ? (
                   <img src={data.photoUrl} alt="Foto" className="w-full h-full object-cover" />
                 ) : (
-                  <div className="text-gray-400 text-xs font-bold">Foto 3x4</div>
+                  <div className="text-gray-400 text-xs font-bold text-center p-2">FOTO 3X4</div>
                 )}
+                <div className="absolute inset-0 border border-black/5 rounded-lg pointer-events-none"></div>
               </div>
             </div>
 
-            {/* Details */}
-            <div className="flex-1 flex flex-col z-10 justify-between min-w-0">
-              <div className="space-y-1.5">
-                <div>
-                  <label className="text-[9px] text-gray-500 uppercase font-black block leading-none mb-1">Nama Lengkap</label>
-                  <div className="text-sm font-bold uppercase truncate border-b border-gray-100 pb-1 leading-tight">{data.name || '-'}</div>
+            {/* Details Section - Refactored with Flexbox for robustness */}
+            <div className="flex-1 flex flex-col" style={{ fontFamily: 'Arial, sans-serif' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flex: 1 }}>
+                {/* Row: Nama */}
+                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '13px', fontWeight: 'bold' }}>
+                  <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>NAMA</span>
+                  <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
+                  <span style={{ color: '#1e3a8a', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{data.name || '-'}</span>
                 </div>
 
-                <div className="flex gap-4">
-                  <div className="flex-1 min-w-0">
-                    <label className="text-[9px] text-gray-500 uppercase font-black block leading-none mb-1">Nomor {data.type}</label>
-                    <div className="text-sm font-bold font-mono border-b border-gray-100 pb-1 truncate leading-tight">{data.number || '-'}</div>
-                  </div>
-                  {data.nip && (
-                    <div className="flex-1 min-w-0">
-                      <label className="text-[9px] text-gray-500 uppercase font-black block leading-none mb-1">NIP</label>
-                      <div className="text-sm font-bold font-mono border-b border-gray-100 pb-1 truncate leading-tight">{data.nip}</div>
-                    </div>
-                  )}
+                {/* Row: Nomor */}
+                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '13px', fontWeight: 'bold' }}>
+                  <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>NOMOR {data.type}</span>
+                  <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
+                  <span style={{ fontFamily: 'monospace', color: '#111827', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {data.type === 'NRG' ? data.nrgNumber : data.nuptkNumber || '-'}
+                  </span>
                 </div>
 
-                <div className="flex gap-4">
-                  <div className="flex-1">
-                    <label className="text-[9px] text-gray-500 uppercase font-black block leading-none mb-1">Tempat, Tgl Lahir</label>
-                    <div className="text-[12px] font-bold truncate border-b border-gray-100 pb-1 leading-tight">
-                      {data.birthPlace || '-'}, {data.birthDate ? formatDate(data.birthDate) : '-'}
-                    </div>
+                {/* Row: NIP (Conditional) */}
+                {data.nip && (
+                  <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '13px', fontWeight: 'bold' }}>
+                    <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>NIP</span>
+                    <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
+                    <span style={{ fontFamily: 'monospace', color: '#111827', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{data.nip}</span>
                   </div>
-                  <div className="w-24">
-                    <label className="text-[9px] text-gray-500 uppercase font-black block leading-none mb-1">Gender</label>
-                    <div className="text-[12px] font-bold truncate border-b border-gray-100 pb-1 leading-tight">{data.gender || '-'}</div>
-                  </div>
+                )}
+
+                {/* Row: TTL */}
+                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '12px', fontWeight: 'bold' }}>
+                  <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>TTL</span>
+                  <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
+                  <span style={{ color: '#1f2937', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{data.birthPlace || '-'}/{data.birthDate ? formatDate(data.birthDate) : '-'}</span>
                 </div>
 
-                <div className="flex gap-4">
-                  <div className="flex-1">
-                    <label className="text-[9px] text-gray-500 uppercase font-black block leading-none mb-1">Unit Kerja</label>
-                    <div className="text-[12px] font-bold line-clamp-2 min-h-[32px] leading-snug pt-0.5">{data.school || '-'}</div>
-                  </div>
-                  <div className="w-24 text-left">
-                    <label className="text-[9px] text-gray-500 uppercase font-black block leading-none mb-1">Guru Mapel</label>
-                    <div className="text-[12px] font-bold truncate border-b border-gray-100 pb-1 leading-tight">{data.subject || '-'}</div>
-                  </div>
+                {/* Row: Bidang Studi */}
+                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '12px', fontWeight: 'bold' }}>
+                  <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>BIDANG STUDI</span>
+                  <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
+                  <span style={{ color: '#1f2937', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{data.subject || '-'}</span>
+                </div>
+
+                {/* Row: Tahun Lulus / No NRG */}
+                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '12px', fontWeight: 'bold' }}>
+                  <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>{data.type === 'NRG' ? 'TAHUN LULUS' : 'NO NRG'}</span>
+                  <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
+                  <span style={{ color: '#1f2937', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{data.type === 'NRG' ? (data.graduationYear || '-') : (data.nrgNumber || '-')}</span>
                 </div>
               </div>
 
-              {/* Bottom Row */}
-              <div className="flex justify-between items-end h-14">
-                <div className="text-[#9ca3af] italic text-[8px] leading-tight space-y-0.5">
-                  <p>*Dokumen ini sah dan diterbitkan secara digital.</p>
-                  <p>Scan QR Code untuk validasi data.</p>
+              {/* Bottom Instructions and QR (Always fixed at bottom) */}
+              <div className="flex justify-between items-end mt-auto">
+                <div className="text-gray-500 italic text-[8px] leading-tight space-y-px" style={{ fontFamily: 'Arial, sans-serif' }}>
+                  <p>* Dokumen ini sah dan diterbitkan secara digital.</p>
+                  <p>* Scan QR Code untuk validasi data pemegang kartu.</p>
+                  <p className="font-black text-gray-600 uppercase tracking-tighter">Kementerian Pendidikan Dasar dan Menengah</p>
                 </div>
-                <div className="bg-white p-1 rounded border border-gray-200 shadow-sm shrink-0">
+                <div className="bg-white p-1 rounded-lg border border-gray-100 shadow-sm shrink-0">
                   <QRCodeSVG
-                    value={`NRG/NUPTK:${data.number}|NAMA:${data.name}|SEKOLAH:${data.school}`}
-                    size={48}
+                    value={`Type:${data.type}|No:${data.type === 'NRG' ? data.nrgNumber : data.nuptkNumber}|Nama:${data.name}`}
+                    size={50}
                     level="H"
                   />
                 </div>
@@ -160,9 +160,10 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
             </div>
           </div>
 
-          <div className="h-2 w-full shrink-0" style={{ backgroundColor: colors.primary }}></div>
+          <div className="h-2 w-full shrink-0 rounded-b-xl" style={{ backgroundColor: colors.primary }}></div>
         </div>
       </div>
+
     </div>
   );
 });

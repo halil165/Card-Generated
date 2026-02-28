@@ -7,35 +7,26 @@ import Footer from './components/Footer';
 import CardForm from './components/CardForm';
 import CardPreview from './components/CardPreview';
 
-interface CardData {
-  type: 'NRG' | 'NUPTK';
-  name: string;
-  number: string;
-  nip: string;
-  school: string;
-  photoUrl: string | null;
-  birthPlace: string;
-  birthDate: string;
-  gender: 'Laki-laki' | 'Perempuan';
-  subject: string;
-}
+import { CardData } from './types';
+
 
 function App() {
   const [data, setData] = useState<CardData>({
     type: 'NRG',
     name: '',
-    number: '',
+    nrgNumber: '',
+    nuptkNumber: '',
     nip: '',
-    school: '',
+    graduationYear: '',
     photoUrl: null,
     birthPlace: '',
     birthDate: '',
-    gender: 'Laki-laki',
     subject: '',
   });
 
   const [isGenerating, setIsGenerating] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  const exportRef = useRef<HTMLDivElement>(null);
 
   const handleExport = async (format: 'pdf' | 'jpg') => {
     if (!cardRef.current) return;
@@ -43,18 +34,47 @@ function App() {
     setIsGenerating(true);
     try {
       // Small delay to ensure QR code and images are fully rendered
+      // Wait for all fonts to be loaded before capture to prevent layout shifts
+      if ('fonts' in document) {
+        await (document as any).fonts.ready;
+      }
+
       await new Promise((resolve) => setTimeout(resolve, 800));
 
-      const canvas = await html2canvas(cardRef.current, {
-        scale: 3, // High resolution
+      const captureElement = exportRef.current || cardRef.current;
+      if (!captureElement) return;
+
+      const canvas = await html2canvas(captureElement, {
+        scale: 2, // Stable scale
         useCORS: true,
         backgroundColor: '#ffffff',
         logging: false,
-        onclone: (document) => {
-          // Ensure the cloned element is visible and has correct sizing
-          const element = document.getElementById('card-to-export');
+        allowTaint: true,
+        onclone: (clonedDoc) => {
+          const element = clonedDoc.getElementById('card-to-export');
           if (element) {
+            // Force reset any UI-specific transforms or scaling
             element.style.transform = 'none';
+            element.style.boxShadow = 'none';
+            element.style.position = 'relative';
+
+
+            // Ensure typography is rendered precisely by forcing computed styles
+            const allNodes = element.getElementsByTagName('*');
+            for (let i = 0; i < allNodes.length; i++) {
+              const node = allNodes[i] as HTMLElement;
+              const computed = window.getComputedStyle(node);
+
+              // Force pixel-perfect font-size and line-height
+              node.style.fontSize = computed.fontSize;
+              node.style.lineHeight = computed.lineHeight;
+              node.style.fontFamily = 'Arial, sans-serif';
+              node.style.letterSpacing = computed.letterSpacing;
+              node.style.fontWeight = computed.fontWeight;
+            }
+
+            (element.style as any).WebkitFontSmoothing = 'antialiased';
+            (element.style as any).MozOsxFontSmoothing = 'grayscale';
           }
         }
       });
@@ -70,7 +90,8 @@ function App() {
         const width = pdf.internal.pageSize.getWidth();
         const height = pdf.internal.pageSize.getHeight();
         pdf.addImage(imgData, 'PNG', 0, 0, width, height);
-        pdf.save(`Kartu-${data.type}-${data.name || 'Guru'}.pdf`);
+        const fileNameNumber = data.type === 'NRG' ? data.nrgNumber : data.nuptkNumber;
+        pdf.save(`Kartu-${data.type}-${data.name || 'Guru'}-${fileNameNumber}.pdf`);
       } else {
         const imgData = canvas.toDataURL('image/jpeg', 0.95);
         const link = document.createElement('a');
@@ -87,10 +108,10 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans text-gray-900 pb-16">
+    <div className="min-h-screen bg-gray-50 font-sans text-gray-900 flex flex-col">
       <Header />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Form Section */}
           <div className="lg:col-span-5 space-y-6">
@@ -132,10 +153,10 @@ function App() {
                 <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md">
                   <button
                     onClick={() => handleExport('pdf')}
-                    disabled={isGenerating || !data.name || !data.number}
+                    disabled={isGenerating || !data.name || (data.type === 'NRG' ? !data.nrgNumber : !data.nuptkNumber)}
                     className={`
                       flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-white shadow-lg transition-all transform hover:-translate-y-0.5
-                      ${isGenerating || !data.name || !data.number
+                      ${isGenerating || !data.name || (data.type === 'NRG' ? !data.nrgNumber : !data.nuptkNumber)
                         ? 'bg-gray-400 cursor-not-allowed shadow-none'
                         : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:shadow-blue-500/30 active:scale-95'
                       }
@@ -151,10 +172,10 @@ function App() {
 
                   <button
                     onClick={() => handleExport('jpg')}
-                    disabled={isGenerating || !data.name || !data.number}
+                    disabled={isGenerating || !data.name || (data.type === 'NRG' ? !data.nrgNumber : !data.nuptkNumber)}
                     className={`
                       flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-white shadow-lg transition-all transform hover:-translate-y-0.5
-                      ${isGenerating || !data.name || !data.number
+                      ${isGenerating || !data.name || (data.type === 'NRG' ? !data.nrgNumber : !data.nuptkNumber)
                         ? 'bg-gray-400 cursor-not-allowed shadow-none'
                         : 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:shadow-emerald-500/30 active:scale-95'
                       }
@@ -179,6 +200,24 @@ function App() {
         </div>
       </main>
       <Footer />
+
+      {/* Hidden container for high-fidelity export capture at 1:1 scale */}
+      <div
+        style={{
+          position: 'absolute',
+          left: '0',
+          top: '-9999px',
+          opacity: 0,
+          pointerEvents: 'none',
+          width: '500px',
+          height: '315px',
+          overflow: 'hidden',
+          zIndex: -1,
+          background: 'white'
+        }}
+      >
+        <CardPreview ref={exportRef} data={data} />
+      </div>
     </div>
   );
 }

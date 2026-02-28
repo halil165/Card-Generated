@@ -37,31 +37,76 @@ export default function DeploymentGuide() {
                 Push Kode ke GitHub
               </h4>
               <p className="text-sm text-gray-600">
-                Pastikan kode aplikasi ini sudah ada di repository GitHub Anda.
+                Ada dua skenario: membuat repository baru atau memperbarui yang sudah ada.
               </p>
-              <div className="bg-gray-900 rounded-lg p-3 font-mono text-xs text-gray-300 space-y-1">
-                <div className="flex gap-2">
-                  <span className="text-green-400">$</span>
-                  <span>git init</span>
+
+              <div className="space-y-4">
+                <div>
+                  <h5 className="text-xs font-semibold text-gray-500 mb-2">A. Untuk Proyek Baru (Setup Awal)</h5>
+                  <div className="bg-gray-900 rounded-lg p-3 font-mono text-xs text-gray-300 space-y-1">
+                    <div className="flex gap-2">
+                      <span className="text-gray-500"># Inisialisasi Git di folder proyek Anda</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-green-400">$</span>
+                      <span>git init</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-gray-500"># Tambahkan semua file untuk disimpan</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-green-400">$</span>
+                      <span>git add .</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-gray-500"># Simpan perubahan dengan sebuah pesan</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-green-400">$</span>
+                      <span>git commit -m "Initial commit"</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-gray-500"># Buat repo baru di GitHub, lalu hubungkan</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-green-400">$</span>
+                      <span>git remote add origin https://github.com/username/repo-name.git</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-gray-500"># Kirim semua perubahan ke GitHub</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-green-400">$</span>
+                      <span>git push -u origin main</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                  <span className="text-green-400">$</span>
-                  <span>git add .</span>
-                </div>
-                <div className="flex gap-2">
-                  <span className="text-green-400">$</span>
-                  <span>git commit -m "Initial commit"</span>
-                </div>
-                <div className="flex gap-2">
-                  <span className="text-gray-500"># Buat repo baru di GitHub, lalu:</span>
-                </div>
-                <div className="flex gap-2">
-                  <span className="text-green-400">$</span>
-                  <span>git remote add origin https://github.com/username/repo-name.git</span>
-                </div>
-                <div className="flex gap-2">
-                  <span className="text-green-400">$</span>
-                  <span>git push -u origin main</span>
+
+                <div>
+                  <h5 className="text-xs font-semibold text-gray-500 mb-2">B. Memperbarui Proyek yang Sudah Ada</h5>
+                  <div className="bg-gray-900 rounded-lg p-3 font-mono text-xs text-gray-300 space-y-1">
+                    <div className="flex gap-2">
+                      <span className="text-gray-500"># Tambahkan semua file yang sudah diubah</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-green-400">$</span>
+                      <span>git add .</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-gray-500"># Simpan perubahan dengan pesan yang jelas</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-green-400">$</span>
+                      <span>git commit -m "Deskripsi perubahan, mis: Perbaiki footer"</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-gray-500"># Kirim perubahan ke GitHub</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-green-400">$</span>
+                      <span>git push origin main</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
