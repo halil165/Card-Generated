@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CardForm from './components/CardForm';
 import CardPreview from './components/CardPreview';
+import kemdikbudLogo from './assets/logo-kemdikbud.png';
 
 import { CardData } from './types';
 
@@ -49,34 +50,7 @@ function App() {
         useCORS: true,
         backgroundColor: '#ffffff',
         logging: false,
-        allowTaint: true,
-        onclone: (clonedDoc) => {
-          const element = clonedDoc.getElementById('card-to-export');
-          if (element) {
-            // Force reset any UI-specific transforms or scaling
-            element.style.transform = 'none';
-            element.style.boxShadow = 'none';
-            element.style.position = 'relative';
-
-
-            // Ensure typography is rendered precisely by forcing computed styles
-            const allNodes = element.getElementsByTagName('*');
-            for (let i = 0; i < allNodes.length; i++) {
-              const node = allNodes[i] as HTMLElement;
-              const computed = window.getComputedStyle(node);
-
-              // Force pixel-perfect font-size and line-height
-              node.style.fontSize = computed.fontSize;
-              node.style.lineHeight = computed.lineHeight;
-              node.style.fontFamily = 'Arial, sans-serif';
-              node.style.letterSpacing = computed.letterSpacing;
-              node.style.fontWeight = computed.fontWeight;
-            }
-
-            (element.style as any).WebkitFontSmoothing = 'antialiased';
-            (element.style as any).MozOsxFontSmoothing = 'grayscale';
-          }
-        }
+        allowTaint: true
       });
 
       if (format === 'pdf') {
@@ -147,7 +121,7 @@ function App() {
                 </h2>
 
                 <div className="transform scale-75 sm:scale-100 transition-transform duration-300 origin-center">
-                  <CardPreview ref={cardRef} data={data} />
+                  <CardPreview ref={cardRef} data={data} logoUrl={kemdikbudLogo} />
                 </div>
 
                 <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md">
@@ -189,9 +163,9 @@ function App() {
                     Unduh JPG
                   </button>
                 </div>
-                {!data.name && (
+                {(!data.name || (data.type === 'NRG' ? !data.nrgNumber : !data.nuptkNumber)) && !isGenerating && (
                   <p className="text-xs text-gray-400 mt-4 italic">
-                    *Lengkapi kartu untuk mengaktifkan tombol unduh
+                    *Lengkapi Nama dan Nomor {data.type} untuk mengaktifkan tombol unduh.
                   </p>
                 )}
               </div>
@@ -216,7 +190,7 @@ function App() {
           background: 'white'
         }}
       >
-        <CardPreview ref={exportRef} data={data} />
+        <CardPreview ref={exportRef} data={data} logoUrl={kemdikbudLogo} />
       </div>
     </div>
   );

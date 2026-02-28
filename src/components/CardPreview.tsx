@@ -8,9 +8,10 @@ import { CardData } from '../types';
 
 interface CardPreviewProps {
   data: CardData;
+  logoUrl: string;
 }
 
-const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref) => {
+const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data, logoUrl }, ref) => {
   const formatDate = (dateString: string) => {
     if (!dateString) return '-';
     const date = new Date(dateString);
@@ -57,7 +58,7 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
 
             <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm z-10 shrink-0">
               <img
-                src="/logo-kemdikbud.png"
+                src={logoUrl}
                 alt="Logo"
                 className="w-9 h-9 object-contain"
                 crossOrigin="anonymous"
@@ -79,7 +80,7 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
           </div>
 
           {/* Content Body */}
-          <div className="flex-1 flex px-6 py-3 gap-5 relative">
+          <div className="flex-1 flex px-6 py-4 gap-5 relative">
             {/* Photo */}
             <div className="w-32 flex flex-col z-10 shrink-0">
               <div className="w-32 h-40 bg-gray-100 border border-gray-200 rounded-lg overflow-hidden shadow-inner flex items-center justify-center relative">
@@ -94,16 +95,16 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
 
             {/* Details Section - Refactored with Flexbox for robustness */}
             <div className="flex-1 flex flex-col" style={{ fontFamily: 'Arial, sans-serif' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flex: 1 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '9px', flex: 1 }}>
                 {/* Row: Nama */}
-                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '13px', fontWeight: 'bold' }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '13px', fontWeight: 'bold', lineHeight: 1.4 }}>
                   <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>NAMA</span>
                   <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
                   <span style={{ color: '#1e3a8a', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{data.name || '-'}</span>
                 </div>
 
                 {/* Row: Nomor */}
-                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '13px', fontWeight: 'bold' }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '13px', fontWeight: 'bold', lineHeight: 1.4 }}>
                   <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>NOMOR {data.type}</span>
                   <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
                   <span style={{ fontFamily: 'monospace', color: '#111827', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -113,7 +114,7 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
 
                 {/* Row: NIP (Conditional) */}
                 {data.nip && (
-                  <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '13px', fontWeight: 'bold' }}>
+                  <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '13px', fontWeight: 'bold', lineHeight: 1.4 }}>
                     <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>NIP</span>
                     <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
                     <span style={{ fontFamily: 'monospace', color: '#111827', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{data.nip}</span>
@@ -121,21 +122,21 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
                 )}
 
                 {/* Row: TTL */}
-                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '12px', fontWeight: 'bold' }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '12px', fontWeight: 'bold', lineHeight: 1.4 }}>
                   <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>TTL</span>
                   <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
                   <span style={{ color: '#1f2937', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{data.birthPlace || '-'}/{data.birthDate ? formatDate(data.birthDate) : '-'}</span>
                 </div>
 
                 {/* Row: Bidang Studi */}
-                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '12px', fontWeight: 'bold' }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '12px', fontWeight: 'bold', lineHeight: 1.4 }}>
                   <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>BIDANG STUDI</span>
                   <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
                   <span style={{ color: '#1f2937', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{data.subject || '-'}</span>
                 </div>
 
                 {/* Row: Tahun Lulus / No NRG */}
-                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '12px', fontWeight: 'bold' }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '12px', fontWeight: 'bold', lineHeight: 1.4 }}>
                   <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>{data.type === 'NRG' ? 'TAHUN LULUS' : 'NO NRG'}</span>
                   <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
                   <span style={{ color: '#1f2937', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{data.type === 'NRG' ? (data.graduationYear || '-') : (data.nrgNumber || '-')}</span>
@@ -144,10 +145,10 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data }, ref)
 
               {/* Bottom Instructions and QR (Always fixed at bottom) */}
               <div className="flex justify-between items-end mt-auto">
-                <div className="text-gray-500 italic text-[8px] leading-tight space-y-px" style={{ fontFamily: 'Arial, sans-serif' }}>
-                  <p>* Dokumen ini sah dan diterbitkan secara digital.</p>
-                  <p>* Scan QR Code untuk validasi data pemegang kartu.</p>
-                  <p className="font-black text-gray-600 uppercase tracking-tighter">Kementerian Pendidikan Dasar dan Menengah</p>
+                <div className="text-gray-500 italic text-[7.5px] leading-tight space-y-px" style={{ fontFamily: 'Arial, sans-serif' }}>
+                  <p>* Kartu ini dibuat menggunakan aplikasi Card Generator.</p>
+                  <p>* Bukan merupakan dokumen resmi dari pemerintah.</p>
+                  <p className="font-bold not-italic text-gray-600 mt-1">Produksi Mandiri oleh Hayyan-Tec Production</p>
                 </div>
                 <div className="bg-white p-1 rounded-lg border border-gray-100 shadow-sm shrink-0">
                   <QRCodeSVG
