@@ -50,7 +50,6 @@ function App() {
         useCORS: true,
         backgroundColor: '#ffffff',
         logging: false,
-        allowTaint: true
       });
 
       if (format === 'pdf') {
@@ -184,8 +183,6 @@ function App() {
           opacity: 0,
           pointerEvents: 'none',
           width: '500px',
-          height: '315px',
-          overflow: 'hidden',
           zIndex: -1,
           background: 'white'
         }}

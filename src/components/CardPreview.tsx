@@ -97,14 +97,14 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data, logoUr
             <div className="flex-1 flex flex-col" style={{ fontFamily: 'Arial, sans-serif' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '9px', flex: 1 }}>
                 {/* Row: Nama */}
-                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '13px', fontWeight: 'bold', lineHeight: 1.4 }}>
+                <div style={{ display: 'flex', alignItems: 'center', fontSize: '13px', fontWeight: 'bold', minHeight: '20px' }}>
                   <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>NAMA</span>
                   <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
                   <span style={{ color: '#1e3a8a', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{data.name || '-'}</span>
                 </div>
 
                 {/* Row: Nomor */}
-                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '13px', fontWeight: 'bold', lineHeight: 1.4 }}>
+                <div style={{ display: 'flex', alignItems: 'center', fontSize: '13px', fontWeight: 'bold', minHeight: '20px' }}>
                   <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>NOMOR {data.type}</span>
                   <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
                   <span style={{ fontFamily: 'monospace', color: '#111827', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -114,7 +114,7 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data, logoUr
 
                 {/* Row: NIP (Conditional) */}
                 {data.nip && (
-                  <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '13px', fontWeight: 'bold', lineHeight: 1.4 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', fontSize: '13px', fontWeight: 'bold', minHeight: '20px' }}>
                     <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>NIP</span>
                     <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
                     <span style={{ fontFamily: 'monospace', color: '#111827', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{data.nip}</span>
@@ -122,21 +122,21 @@ const CardPreview = forwardRef<HTMLDivElement, CardPreviewProps>(({ data, logoUr
                 )}
 
                 {/* Row: TTL */}
-                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '12px', fontWeight: 'bold', lineHeight: 1.4 }}>
+                <div style={{ display: 'flex', alignItems: 'center', fontSize: '12px', fontWeight: 'bold', minHeight: '20px' }}>
                   <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>TTL</span>
                   <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
                   <span style={{ color: '#1f2937', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{data.birthPlace || '-'}/{data.birthDate ? formatDate(data.birthDate) : '-'}</span>
                 </div>
 
                 {/* Row: Bidang Studi */}
-                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '12px', fontWeight: 'bold', lineHeight: 1.4 }}>
+                <div style={{ display: 'flex', alignItems: 'center', fontSize: '12px', fontWeight: 'bold', minHeight: '20px' }}>
                   <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>BIDANG STUDI</span>
                   <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
                   <span style={{ color: '#1f2937', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{data.subject || '-'}</span>
                 </div>
 
                 {/* Row: Tahun Lulus / No NRG */}
-                <div style={{ display: 'flex', alignItems: 'baseline', fontSize: '12px', fontWeight: 'bold', lineHeight: 1.4 }}>
+                <div style={{ display: 'flex', alignItems: 'center', fontSize: '12px', fontWeight: 'bold', minHeight: '20px' }}>
                   <span style={{ width: '90px', color: '#374151', flexShrink: 0, fontSize: '11px' }}>{data.type === 'NRG' ? 'TAHUN LULUS' : 'NO NRG'}</span>
                   <span style={{ width: '10px', color: '#374151', flexShrink: 0 }}>:</span>
                   <span style={{ color: '#1f2937', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{data.type === 'NRG' ? (data.graduationYear || '-') : (data.nrgNumber || '-')}</span>
