@@ -54,15 +54,19 @@ function App() {
 
       if (format === 'pdf') {
         const imgData = canvas.toDataURL('image/png', 1.0);
+
+        // Hitung rasio aspek dari canvas agar gambar tidak gepeng/distorsi
+        const ratio = canvas.height / canvas.width;
+        const pdfWidth = 85.6;
+        const pdfHeight = pdfWidth * ratio;
+
         const pdf = new jsPDF({
           orientation: 'landscape',
           unit: 'mm',
-          format: [85.6, 53.98], // Credit card size
+          format: [pdfWidth, pdfHeight],
         });
 
-        const width = pdf.internal.pageSize.getWidth();
-        const height = pdf.internal.pageSize.getHeight();
-        pdf.addImage(imgData, 'PNG', 0, 0, width, height);
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
         const fileNameNumber = data.type === 'NRG' ? data.nrgNumber : data.nuptkNumber;
         pdf.save(`Kartu-${data.type}-${data.name || 'Guru'}-${fileNameNumber}.pdf`);
       } else {
@@ -177,9 +181,9 @@ function App() {
       {/* Hidden container for high-fidelity export capture at 1:1 scale */}
       <div
         style={{
-          position: 'absolute',
-          left: '0',
-          top: '-9999px',
+          position: 'fixed',
+          left: '-10000px',
+          top: '0',
           opacity: 0,
           pointerEvents: 'none',
           width: '500px',
